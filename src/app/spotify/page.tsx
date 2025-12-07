@@ -1,6 +1,6 @@
 import { getUserData, getUserRecentlyPlayed } from "@/actions/spotify";
 import { UserProfile, RecentlyPlayedResponse } from "@/types/spotify";
-import { Music, Users, ExternalLink, Clock, Play } from "lucide-react";
+import { Users, ExternalLink, Clock, Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -67,18 +67,15 @@ export default async function SpotifyPage() {
 
           {/* Actions */}
           <div className="flex gap-4">
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border-white/30 text-white hover:bg-white/10 hover:text-white">
+            <Button asChild variant="default" className="rounded-full">
+              :laughing: Roast Me
+            </Button>
+            <Button asChild variant="outline" className="rounded-full">
               <Link href={userData.external_urls.spotify} target="_blank">
                 Open in Spotify <ExternalLink className="ml-2 size-4" />
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="ghost"
-              className="rounded-full text-gray-400 hover:text-white">
+            <Button asChild variant="ghost" className="rounded-full">
               <Link href="/">Back Home</Link>
             </Button>
           </div>
@@ -87,11 +84,6 @@ export default async function SpotifyPage() {
 
       {/* Playlists Section */}
       <main className="max-w-7xl mx-auto px-8 py-12">
-        <div className="flex items-center gap-4 mb-8">
-          <Music className="size-6 text-[#1DB954]" />
-          <h2 className="text-2xl font-bold">Your Playlists</h2>
-        </div>
-
         {/* Recently Played Section */}
         <div className="mt-16">
           <div className="flex items-center gap-4 mb-8">
