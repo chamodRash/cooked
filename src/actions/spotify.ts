@@ -66,3 +66,32 @@ export async function getUserPlaylists() {
 
   return data;
 }
+
+export async function getUserRecentlyPlayed() {
+  const access_token = await getAccessToken();
+
+  // Authorization Header for Spotify API requests
+  const authHeader = `Bearer ${access_token}`;
+
+  // Fetch the user's recently played tracks from Spotify
+  const response = await fetch(
+    "https://api.spotify.com/v1/me/player/recently-played?limit=20",
+    {
+      headers: {
+        Authorization: authHeader,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    console.error(
+      "Failed to fetch Spotify recently played:",
+      await response.text()
+    );
+    throw new Error("Failed to fetch Spotify recently played");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
