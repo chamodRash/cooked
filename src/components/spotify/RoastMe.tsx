@@ -10,6 +10,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { generateRoast } from "@/actions/roast";
 import { Loader2, Flame, RefreshCw } from "lucide-react";
 
@@ -17,13 +24,14 @@ export function RoastMe() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [roast, setRoast] = useState<string | null>(null);
+  const [model, setModel] = useState("gemini-2.5-flash");
 
   const handleRoast = async () => {
     setIsLoading(true);
     setRoast(null);
 
     try {
-      const result = await generateRoast();
+      const result = await generateRoast(model);
       if (result.success && result.roast) {
         setRoast(result.roast);
       } else {
@@ -63,6 +71,20 @@ export function RoastMe() {
             Based on your questionable music taste...
           </DialogDescription>
         </DialogHeader>
+
+        <div className="px-4 pt-2">
+          <Select value={model} onValueChange={setModel}>
+            <SelectTrigger className="w-full bg-[#181818] border-[#282828] text-white">
+              <SelectValue placeholder="Select Model" />
+            </SelectTrigger>
+            <SelectContent className="bg-[#181818] border-[#282828] text-white">
+              <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
+              <SelectItem value="gemini-1.5-pro">Gemini 1.5 Pro</SelectItem>
+              <SelectItem value="gemini-1.5-flash">Gemini 1.5 Flash</SelectItem>
+              <SelectItem value="gemini-3-pro-preview">Gemini 3 Pro</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
         <div className="min-h-[200px] flex flex-col items-center justify-center p-4">
           {isLoading ? (

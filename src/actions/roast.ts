@@ -7,7 +7,7 @@ import { RecentlyPlayedResponse, UserProfile } from "@/types/spotify";
 /**
  * Fetches user data, generates a roast prompt, and calls Gemini.
  */
-export async function generateRoast() {
+export async function generateRoast(model: string = "gemini-2.5-flash") {
   try {
     // 1. Gather User Data (Server-side)
     const user: UserProfile = await getUserData();
@@ -43,7 +43,7 @@ export async function generateRoast() {
 
     // 3. Call the Gemini API
     const response = await ai.models.generateContent({
-      model: "gemini-3-pro-preview", // Add gemini 3 pro
+      model: model,
       contents: prompt,
     });
 
