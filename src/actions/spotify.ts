@@ -41,34 +41,22 @@ export async function getUserData() {
   return data;
 }
 
-export async function getUserPlaylists() {
-  const access_token = await getAccessToken();
+export async function getUserRecentlyPlayed() {
+  // Get the refresh token from cookies
+  const cookie = await cookies();
+  let access_token = cookie.get("spotify_access_token")?.value;
+  const refresh_token = cookie.get("spotify_refresh_token")?.value;
 
-  // Authorization Header for Spotify API requests
-  const authHeader = `Bearer ${access_token}`;
-
-  // Fetch the user's playlists from Spotify
-  const response = await fetch("https://api.spotify.com/v1/me/playlists", {
-    headers: {
-      Authorization: authHeader,
-    },
-  });
-
-  if (!response.ok) {
-    console.error(
-      "Failed to fetch Spotify user playlists:",
-      await response.text()
+  if (!refresh_token) {
+    //Redirect to error page if no refresh token found
+    redirect(
+      "/error?message=No Spotify refresh token found. Please login again."
     );
-    throw new Error("Failed to fetch Spotify user playlists");
   }
 
-  const data = await response.json();
-
-  return data;
-}
-
-export async function getUserRecentlyPlayed() {
-  const access_token = await getAccessToken();
+  if (!access_token) {
+    access_token = await getAccessToken();
+  }
 
   // Authorization Header for Spotify API requests
   const authHeader = `Bearer ${access_token}`;

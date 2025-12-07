@@ -40,8 +40,7 @@ export async function GET() {
 
     // --- 4. Build Authorization URL and Redirect ---
 
-    const scope =
-      "user-read-private user-read-email playlist-read-private playlist-read-collaborative";
+    const scope = "user-read-private user-read-email user-read-recently-played";
     const authUrl = new URL("https://accounts.spotify.com/authorize"); // Spotify Auth Endpoint
 
     const params = new URLSearchParams({

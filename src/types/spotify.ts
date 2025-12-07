@@ -66,16 +66,6 @@ export interface Playlist {
   uri: string;
 }
 
-export interface UserPlaylistsResponse {
-  href: string;
-  limit: number;
-  next: string;
-  offset: number;
-  previous: string;
-  total: number;
-  items: Playlist[];
-}
-
 // Recently Played Track types
 export interface Artist {
   external_urls: ExternalUrls;
