@@ -67,10 +67,13 @@ export default async function SpotifyPage() {
 
           {/* Actions */}
           <div className="flex gap-4">
-            <Button asChild variant="default" className="rounded-full">
-              :laughing: Roast Me
+            <Button variant="default" className="rounded-full">
+              😆 Roast Me
             </Button>
-            <Button asChild variant="outline" className="rounded-full">
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full bg-white/30 text-black/60">
               <Link href={userData.external_urls.spotify} target="_blank">
                 Open in Spotify <ExternalLink className="ml-2 size-4" />
               </Link>
