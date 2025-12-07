@@ -32,7 +32,7 @@ export async function generateRoast() {
     const prompt = `
       You are a stand-up comedian specialized in roasting music listeners. 
       You have been given the following user data and their recently played Spotify tracks. 
-      Your goal is to write a short, funny, and mildly insulting roast based on this information. 
+      Your goal is to write a short, funny, and insulting roast based on this information. 
       Keep it brief and concise.
       
       User Data:
@@ -43,7 +43,7 @@ export async function generateRoast() {
 
     // 3. Call the Gemini API
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash", // A fast model suitable for quick, creative text
+      model: "gemini-3-pro-preview", // Add gemini 3 pro
       contents: prompt,
     });
 

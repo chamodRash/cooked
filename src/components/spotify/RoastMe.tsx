@@ -27,7 +27,7 @@ export function RoastMe() {
       if (result.success && result.roast) {
         setRoast(result.roast);
       } else {
-        setRoast("Failed to generate roast. Please try again.");
+        setRoast(result.roast!);
       }
     } catch (error) {
       console.error("Error generating roast:", error);
