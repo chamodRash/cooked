@@ -44,21 +44,29 @@ export async function getAccessToken(): Promise<string> {
   const newRefreshToken = data.refresh_token;
 
   // 3. Store the NEW Access Token in cookies using the cookies() utility
-  cookieJar.set("spotify_access_token", access_token!, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    maxAge: 3600 - 60, // 59 minutes
-    path: "/",
-  });
-
-  // 4. Update Refresh Token if Spotify provided a new one
-  if (newRefreshToken && newRefreshToken !== refresh_token) {
-    cookieJar.set("spotify_refresh_token", newRefreshToken, {
+  try {
+    cookieJar.set("spotify_access_token", access_token!, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 30 * 24 * 60 * 60, // 30 days
+      maxAge: 3600 - 60, // 59 minutes
       path: "/",
     });
+
+    // 4. Update Refresh Token if Spotify provided a new one
+    if (newRefreshToken && newRefreshToken !== refresh_token) {
+      cookieJar.set("spotify_refresh_token", newRefreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+        path: "/",
+      });
+    }
+  } catch (error) {
+    console.warn(
+      "Could not set cookies (likely in Server Component render):",
+      error
+    );
+    // We continue because we have the token to return
   }
 
   return access_token;
