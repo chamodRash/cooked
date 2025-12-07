@@ -4,6 +4,14 @@ import { getAccessToken } from "@/lib/spotify";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("spotify_access_token");
+  cookieStore.delete("spotify_refresh_token");
+  cookieStore.delete("spotify_code_verifier");
+  redirect("/");
+}
+
 export async function getUserData() {
   // Get the refresh token from cookies
   const cookie = await cookies();
