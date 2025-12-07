@@ -68,7 +68,7 @@ export default async function SpotifyPage() {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-4">
+          <div className="flex flex-col lg:flex-row gap-4">
             <RoastMe />
             <Button
               asChild
