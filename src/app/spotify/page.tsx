@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { RoastMe } from "@/components/spotify/RoastMe";
 
 function formatDuration(ms: number) {
   const minutes = Math.floor(ms / 60000);
@@ -67,19 +68,15 @@ export default async function SpotifyPage() {
 
           {/* Actions */}
           <div className="flex gap-4">
-            <Button variant="default" className="rounded-full">
-              😆 Roast Me
-            </Button>
+            <RoastMe />
             <Button
               asChild
               variant="outline"
-              className="rounded-full bg-white/30 text-black/60">
+              size={"lg"}
+              className="rounded-full bg-white/30">
               <Link href={userData.external_urls.spotify} target="_blank">
-                Open in Spotify <ExternalLink className="ml-2 size-4" />
+                Open in Spotify <ExternalLink className="ml-1 size-4" />
               </Link>
-            </Button>
-            <Button asChild variant="ghost" className="rounded-full">
-              <Link href="/">Back Home</Link>
             </Button>
           </div>
         </div>
